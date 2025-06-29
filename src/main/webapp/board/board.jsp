@@ -17,12 +17,67 @@
 			<a id='list'>게시판</a> <a id='insert'>등록</a>
 		</nav>
 		<div class='outer'>
-		
+			
 		</div>
 	</div>
 	<script>
-		
+		$(function(){
+			$("#list").click(function(){
+				$.ajax({
+					url:"<%=request.getContextPath()%>/board/list",
+					method:"get",
+					dataType:"html",
+					success:function(data){
+						$(".outer").html(data);
+					},
+					error:function(xhr, status, err){
+						console.log(xhr,status, err);
+					}
+				});
+			});
+			
+			$(".outer").on("click",".list-table tr",function(){				
+				$.ajax({
+					url:"<%=request.getContextPath()%>/board/view",
+					data:{
+						boardNo:$(this).find("td").eq(0).html()
+					},
+					success:function(data){
+						$(".outer").html(data);
+					},
+					error:function(xhr, status, err){
+						console.log(xhr,status, err);
+					}
+				});
+			});
+			
+			$("#insert").click(function(){
+				$.ajax({
+					url:"<%=request.getContextPath()%>/board/insert",
+					method:"get",
+					dataType:"html",
+					success:function(data){
+						//${".outer"}.html(data);
+						$(".outer").html(data);
+					},
+					error:function(xhr, status, err){
+						console.log(xhr, status, err);
+					}
+				});
+			});
+			if(${requestScope.posted} === 1){
+				$.ajax({
+					url:"<%=request.getContextPath()%>/board/list",
+					success:function(data){
+						console.log(data);
+						$(".outer").html(data);
+					},
+					error:function(xhr,status,err){
+						console.log(xhr,status,err);
+					}
+				});
+			}
+		});
 	</script>
-
 </body>
 </html>
