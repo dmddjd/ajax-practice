@@ -69,7 +69,7 @@
 				$.ajax({
 					url:"<%=request.getContextPath()%>/board/list",
 					success:function(data){
-						// console.log(data);
+						console.log(data);
 						$(".outer").html(data);
 					},
 					error:function(xhr,status,err){
