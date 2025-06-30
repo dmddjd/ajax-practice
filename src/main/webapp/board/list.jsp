@@ -15,6 +15,7 @@
 		</tr>
 	</thead>
 	<tbody>
+		<!-- 반복문으로 등록된 게시글들를 출력하는곳입니다. -->
 		<c:forEach var="board" items="${list}">
 			<tr>
 				<td>${board.no}</td>

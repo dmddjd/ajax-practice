@@ -28,24 +28,18 @@ public class BoardServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		List<Board> list = (List<Board>)session.getAttribute("list");
+		
 		if(list == null) {
 			list = new ArrayList<>();
-
-			list.add(new Board(1,"kh게시판 1번글","admin","안녕하세요",new Date()));
-			list.add(new Board(2,"kh게시판 2번글","admin","안녕하세요",new Date()));
-			list.add(new Board(3,"kh게시판 1번글","mkm","안녕하세요",new Date()));
-			list.add(new Board(4,"kh게시판 4번글","user01","안녕하세요",new Date()));
-			list.add(new Board(5,"kh게시판 5번글","user01","안녕하세요",new Date()));
+			list.add(new Board(1,"kh게시판 1번글","admin","안녕하세요1",new Date()));
+			list.add(new Board(2,"kh게시판 2번글","admin","안녕하세요2",new Date()));
+			list.add(new Board(3,"kh게시판 1번글","mkm","안녕하세요3",new Date()));
+			list.add(new Board(4,"kh게시판 4번글","user01","안녕하세요4",new Date()));
+			list.add(new Board(5,"kh게시판 5번글","user02","안녕하세요5",new Date()));
 			
 			session.setAttribute("list", list);
 		}
 		
-		if(request.getParameter("posted") == null) {
-			request.setAttribute("posted", 0);
-		}else {
-			request.setAttribute("posted", request.getParameter("posted"));
-		}
-	
 		request.getRequestDispatcher("/board/board.jsp").forward(request, response);
 	}
 }
