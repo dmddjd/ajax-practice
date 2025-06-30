@@ -28,20 +28,35 @@ public class BoardInsertServlet extends HttpServlet {
 		request.getRequestDispatcher("/board/insert.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		
 		String title = request.getParameter("title");
 		String nickname = request.getParameter("nickname");
 		String content = request.getParameter("content");
+		//
+		Board b = new Board();
+		b.setTitle(title);
+		b.setNickname(nickname);
+		b.setContent(content);
+		b.setCreateDate(new Date());
 		
-		List<Board> list = (List<Board>)session.getAttribute("list");
+		List<Board> list = (List<Board>)request.getSession().getAttribute("list");
 		
-		Board board = new Board(list.size()+1,title,nickname,content,new Date());
+		int no = list.stream().mapToInt(board -> b.getNo()).max().getAsInt();
+		b.setNo(no+1);
+		list.add(b);
 		
-		list.add(board);
+		response.getWriter().print("service success");
+		//
 		
-		session.setAttribute("list", list);
 		
-		request.getRequestDispatcher("/board/insert.jsp").forward(request, response);
+//		HttpSession session = request.getSession();
+//		List<Board> list = (List<Board>)session.getAttribute("list");
+//		
+//		Board board = new Board(list.size()+1,title,nickname,content,new Date());
+//		
+//		list.add(board);
+//		
+//		session.setAttribute("list", list);
+//		
+//		request.getRequestDispatcher("/board/insert.jsp").forward(request, response);
 	}
 }

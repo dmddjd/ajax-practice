@@ -40,6 +40,12 @@ public class BoardServlet extends HttpServlet {
 			session.setAttribute("list", list);
 		}
 		
+		if(request.getParameter("posted") == null) {
+			request.setAttribute("posted", 0);
+		}else {
+			request.setAttribute("posted", request.getParameter("posted"));
+		}
+		
 		request.getRequestDispatcher("/board/board.jsp").forward(request, response);
 	}
 }

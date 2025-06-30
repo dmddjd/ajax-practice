@@ -35,7 +35,8 @@
 					}
 				});
 			});
-			
+		});
+		$(function(){
 			$(".outer").on("click",".list-table tr",function(){				
 				$.ajax({
 					url:"<%=request.getContextPath()%>/board/view",
@@ -50,14 +51,14 @@
 					}
 				});
 			});
-			
+		});
+		$(function(){
 			$("#insert").click(function(){
 				$.ajax({
 					url:"<%=request.getContextPath()%>/board/insert",
 					method:"get",
 					dataType:"html",
 					success:function(data){
-						//${".outer"}.html(data);
 						$(".outer").html(data);
 					},
 					error:function(xhr, status, err){
@@ -65,19 +66,19 @@
 					}
 				});
 			});
-			if(${requestScope.posted} === 1){
-				$.ajax({
-					url:"<%=request.getContextPath()%>/board/list",
-					success:function(data){
-						//console.log(data);
-						$(".outer").html(data);
-					},
-					error:function(xhr,status,err){
-						console.log(xhr,status,err);
-					}
-				});
-			}
 		});
+		if(${requestScope.posted} === 1){
+			$.ajax({
+				url:"<%=request.getContextPath()%>/board/list",
+				success:function(data){
+						//console.log(data);
+					$(".outer").html(data);
+				},
+				error:function(xhr,status,err){
+					console.log(xhr,status,err);
+				}
+			});
+		}
 	</script>
 </body>
 </html>

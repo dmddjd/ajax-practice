@@ -23,7 +23,7 @@
 	</tr>
 </table>
 <script>
-	$(function(){
+	<%-- $(function(){
 		$("#btn").click(function(){
 			$.ajax({
 				url:"<%=request.getContextPath()%>/board/insert",
@@ -43,5 +43,29 @@
 				}
 			});
 		});
-	});
+	}); --%>
+	
+	$(function(){
+		$("#btn").click(function(){
+			$.ajax({
+				url:"<%=request.getContextPath()%>/board/insert",
+				method:"post",
+				data:{
+					title:$("[name=title]").val(),
+					nickname:$("[name=nickname]").val(),
+					content:$("[name=content]").val()
+				},
+				success:function(data){
+					// 1. 등록 성공 메세지
+					alert(data);
+					
+					// 2. list 조회
+					$("#list").click();
+				},
+				error:function(err){
+					console.log(err)
+				}
+			})
+		})
+	})
 </script>
